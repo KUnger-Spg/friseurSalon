@@ -28,12 +28,12 @@ Content-Type: application/json
 }
 
 ###
-GET  http://localhost:8080/api/customers/vrsn
+GET  http://localhost:8080/api/customers/4sYu
 Accept: application/json
 
 ###
 
-GET  http://localhost:8080/api/customers/Pa12
+GET  http://localhost:8080/api/customers/fLTk
 Accept: application/json
 
 ###
