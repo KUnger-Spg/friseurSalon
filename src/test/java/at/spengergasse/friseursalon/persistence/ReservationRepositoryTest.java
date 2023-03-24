@@ -132,7 +132,7 @@ class ReservationRepositoryTest {
 
     }
 
-//    @Disabled  //ignore test
+    @Disabled  //ignore test
     @Test
     void ensureReadingReservationInfoDTOWorksCorrectly() {
 
