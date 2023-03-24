@@ -1,0 +1,26 @@
+###
+GET  http://localhost:8080/api/products/
+
+> {%
+ client.test("Request executed successfully", function() {
+ client.assert(response.status === 200, "Response status is not 200");
+ });
+ %}
+
+###
+POST http://localhost:8080/api/products/
+Content-Type: application/json
+
+{
+  "productName" : "Schampoo",
+  "reservationKey" : "AHQqx"
+}
+
+###
+POST http://localhost:8080/api/products/
+Content-Type: application/json
+
+{
+  "productName" : "Schampoo",
+  "productPreis" : 10.50
+}

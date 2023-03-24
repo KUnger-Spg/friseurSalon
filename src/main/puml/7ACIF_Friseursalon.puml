@@ -1,0 +1,139 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+entity Reservation {
+- reservationName : String
+- creationTS : LocalDateTime
+- customer : Customer
+'- product : Product
+'- service : Service
+'- bookedProduct : BookedProduct
+'- bookedService : BookedService
+}
+
+entity Service {
+- serviceName : String
+- servicePreis : Decimal
+- serviceCurrency : Currency
+- serviceDuration : Duration
+'- bookedService : BookedService
+'- reservationsBS : Set<BookedService>
+- reservations : Set<BookedService>
+- creationTS : LocalDateTime
+}
+
+class BookedService  << (V, #FF7700) value-object >> {
+'- reservationBS : Reservation
+- reservation : Reservation
+- serviceTS : LocalDateTime
+- serviceAmount : Integer
+- barber : Barber
+}
+
+entity Product {
+- productName : String
+- productPreis : Decimal
+- productCurrency : Currency
+'- bookedProduct : BookedProduct
+'- reservationsBP : Set<BookedProduct>
+- reservations : Set<BookedProduct>
+- creationTS : LocalDateTime
+}
+
+class BookedProduct  << (V, #FF7700) value-object >> {
+'- reservationBP : Reservation
+- reservation : Reservation
+- productAmount : Integer
+- productTS : LocalDateTime
+}
+
+abstract AbstractPerson {
+- userName : String
+- password : String
+- firstName : String
+- lastName : String
+}
+
+entity Customer {
+- billingAddress : Address
+- mobilePhoneNumber : PhoneNumber
+- email : Email
+- gender : Gender
+}
+
+'entity Admin {
+'- mobilePhoneNumber : PhoneNumber
+'- businessPhoneNumber : PhoneNumber
+'- email : Email
+'}
+
+entity Barber {
+- nickName : String
+- mobilePhoneNumber : PhoneNumber
+- email : Email
+}
+
+enum Gender {
+MALE
+FEMALE
+DIVERS
+}
+
+entity Country {
+name : String
+iso2Code : String
+}
+
+enum EmailType {
+PRIVATE
+BUSINESS
+}
+
+class Address << (V, #FF7700) value-object >> {
+- streetNumber : String
+- zipCode : String
+- city : String
+- country : Country
+}
+
+class PhoneNumber << (V, #FF7700) value-object >> {
+- countryCode : Integer
+- areaCode : Integer
+- serialNumber : String
+}
+
+class Email << (V, #FF7700) value-object >> {
+- address : String
+- type : EmailType
+}
+
+'Reservierung "0..n" o..o "0..1" ReservierungList
+'Admin -right-|> Barber : manages >
+Customer -up-|> AbstractPerson
+Barber -up-|> AbstractPerson
+Customer "0..1" -right- "0..n" Reservation : done by <
+'Admin "0..1" -- "0..n" Reservation : handled by <
+'Reservation "0..n" -down- "0..n" Product
+'Reservation "0..n" -down- "0..n" Service
+'Reservation "0..1" -up- "0..n" BookedProduct
+'Reservation "0..1" -up- "0..n" BookedService
+Reservation -- "1..n" BookedProduct
+Reservation -up- "1..n" BookedService
+'Product  -left-  BookedProduct
+'Service  -right-  BookedService
+Product  *-left- "1..n" BookedProduct
+Service  *-left- "1..n"  BookedService
+'Barber "0..n" -- "0..n" BookedService
+Barber -- "0..n" BookedService
+' Admin "1" -right- "0..n" Barber : manages >
+Customer -- "0..1" Address : billingAddress
+Customer -right- PhoneNumber : mobilePhoneNumber
+Customer -- "0..1" Email : has >
+Customer -left- Gender
+Barber -left- PhoneNumber : mobilePhoneNumber
+'Admin -up- "0..1" PhoneNumber : businessPhoneNumber
+Barber -- "0..1" Email : has >
+Email -- EmailType
+Address "0..n" -- Country
+
+@enduml

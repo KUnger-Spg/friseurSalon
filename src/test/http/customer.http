@@ -1,0 +1,44 @@
+POST  http://localhost:8080/api/customers/
+Content-Type: application/json
+
+{
+  "userName" : "uk@spg.at",
+  "password" : "Leo_89042",
+  "firstName" : "Klaus",
+  "lastName" : "UNGER",
+  "billingAddressStreetNumber" : "Spengergasse 20",
+  "billingAddressZipCode" : "1050",
+  "billingAddressCity" : "Vienna",
+  "billingAddressCountryIso2Code" : "AT"
+}
+
+###
+POST  http://localhost:8080/api/customers/
+Content-Type: application/json
+
+{
+  "userName" : "sbt@spg.at",
+  "password" : "Wien_89042",
+  "firstName" : "Selcuk",
+  "lastName" : "Büyüktanir",
+  "billingAddressStreetNumber" : "Spengergasse 21",
+  "billingAddressZipCode" : "1050",
+  "billingAddressCity" : "Vienna",
+  "billingAddressCountryIso2Code" : "AT"
+}
+
+###
+GET  http://localhost:8080/api/customers/vrsn
+Accept: application/json
+
+###
+
+GET  http://localhost:8080/api/customers/Pa12
+Accept: application/json
+
+###
+
+GET  http://localhost:8080/api/customers/
+Accept: application/json
+
+###

@@ -1,0 +1,22 @@
+GET  http://localhost:8080/api/services/
+
+> {%
+ client.test("Request executed successfully", function() {
+ client.assert(response.status === 200, "Response status is not 200");
+ });
+ %}
+
+###
+
+GET  http://localhost:8080/api/services/Haarschnitt
+Accept: application/json
+
+
+###
+
+POST http://localhost:8080/api/services/
+Content-Type: application/json
+
+{
+  "serviceName" : "Haarschnitt"
+}
