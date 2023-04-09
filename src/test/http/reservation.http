@@ -27,42 +27,19 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/api/reservations/
-Content-Type: application/json
-
-{
-"reservationName" : "Selci Haarschnitt",
-"customerId" : 1453
-}
-
-> {%
- client.test("Request executed successfully", function() {
- client.assert(response.status === 201, "Response status is not 201");
- });
-
- client.test("Response content-type is json", function () {
-     var type = response.contentType.mimeType;
-     client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
- });
-
- var location = response.headers.valueOf("Location");
- var token = location.substring(location.lastIndexOf("/")+1);
- client.global.set("token", token);
- %}
-
-###
-//GET  http://localhost:8080/api/reservations/Selci%20Haarschnitt
-GET  http://localhost:8080/api/reservations/{{token}}
+GET  http://localhost:8080/api/reservations/9es2N
 
 ###
 //PATCH  http://localhost:8080/api/reservations/Selci%20Haarschnitt?reservationName=SBT-Haarschnitt
-PATCH  http://localhost:8080/api/reservations/{{token}}?reservationName=SBT-Haarschnitt
+PATCH  http://localhost:8080/api/reservations/9es2N?reservationName=SBT-Haarschnitt
 
 ###
-GET  http://localhost:8080/api/reservations/{{token}}
+GET  http://localhost:8080/api/reservations/Wapzt
 
 > {%
  client.test("Request executed successfully", function() {
  client.assert(response.status === 200, "Response status is not 200");
  });
  %}
+
+###

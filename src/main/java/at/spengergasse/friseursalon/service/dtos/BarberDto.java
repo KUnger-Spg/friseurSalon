@@ -11,4 +11,5 @@ public record BarberDto(String nickName,
                 barber.getFirstName(),
                 barber.getLastName());
     }
+
 }

@@ -12,6 +12,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -24,17 +25,14 @@ public class CustomerRestController {
 
     private final CustomerService customerService;
 
-/*
-   @PostMapping( { "", "/"} )
-    public HttpEntity<CustomerDto> createCustomer(@Valid @RequestBody CreateCustomerCommand cmd) {
-
-        Customer customer = customerService.createCustomer(cmd);
-        URI location = linkTo(methodOn(CustomerRestController.class).getCustomer(customer.getKey())).withSelfRel().toUri();
-        CustomerDto dto = new CustomerDto(customer);
-        return ResponseEntity.created(location).body(dto);
-
-   }
-*/
+    @GetMapping({ "", "/"})
+    public HttpEntity<List<CustomerDto>> getAllCustomers() {
+        return ResponseEntity.ok(customerService
+                .getAllCustomers()
+                .stream()
+                .map(CustomerDto::new)
+                .toList());
+    }
 
     @PostMapping( { "", "/"} )
     public HttpEntity<CustomerDto> createCustomer(@RequestBody CreateCustomerCommand createCustomerCommand) {
